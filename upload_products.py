@@ -7,17 +7,17 @@ import os
 import base64
 from pathlib import Path
 
-from credentials import CONFIGURATION_SHOP_URL, CONFIGURATION_ADMIN_API_TOKEN, CONFIGURATION_EXCEL_FILE, CONFIGURATION_API_VERSION
+from credentials import CONFIG_SHOP_URL, CONFIG_ADMIN_API_TOKEN, CONFIG_EXCEL_FILE, CONFIG_API_VERSION
 
 
-# Map configuration constants imported from `credentials.py` into local
+# Map config constants imported from `credentials.py` into local
 # variables used throughout this module. Keeping them as distinct names
 # improves readability and makes it clear what values come from the
-# configuration file versus local runtime values.
-SHOP_URL = CONFIGURATION_SHOP_URL
-ADMIN_API_TOKEN = CONFIGURATION_ADMIN_API_TOKEN
-EXCEL_FILE = CONFIGURATION_EXCEL_FILE
-API_VERSION = CONFIGURATION_API_VERSION
+# config file versus local runtime values.
+SHOP_URL = CONFIG_SHOP_URL
+ADMIN_API_TOKEN = CONFIG_ADMIN_API_TOKEN
+EXCEL_FILE = CONFIG_EXCEL_FILE
+API_VERSION = CONFIG_API_VERSION
 # ---------------------
 
 
@@ -926,7 +926,7 @@ def main():
             print(f"Error: Missing required columns: {', '.join(missing_columns)}", file=sys.stderr)
             return
         
-        grouped = df.groupby('handle')
+        grouped = df.groupby('handle') #groupby used to group rows by 'handle'
         
         for handle, group_df in grouped:
             print(f"\n--- Processing Product: {handle} ---")
@@ -979,6 +979,6 @@ def main():
 if __name__ == "__main__":
     if not SHOP_URL or not ADMIN_API_TOKEN or SHOP_URL == "your-store.myshopify.com" or ADMIN_API_TOKEN == "shpat_xxxxxxxxxxxxx":
         print("Error: SHOP_URL and ADMIN_API_TOKEN must be set at the top of the script.", file=sys.stderr)
-        print("Please update the configuration section with your Shopify store details.", file=sys.stderr)
+        print("Please update the config section with your Shopify store details.", file=sys.stderr)
     else:
         main()
